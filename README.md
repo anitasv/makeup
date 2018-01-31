@@ -1,2 +1,32 @@
 # makeup
-A set of small libraries to make your javascript beter
+A set of small libraries to make your javascript beter. Performance may not be great yet, working on it.
+
+## Concealer
+Helps you hide your private fields and methods.
+
+your normal life:
+```javascript
+function Animal(sound, breed) {
+    this._sound = sound
+    this.breed = breed
+}
+
+Animal.prototype._greeting = function() {
+    return this.breed + ' says ';
+}
+
+Animal.prototype.talk = function() {
+    return this._greeting() + this._sound
+}
+
+```
+
+But normally private fields are only by convention of underscore, but you can enforce by:
+
+```
+Animal = concealer(Animal)
+
+var a = new Animal('bark', 'dog')
+```
+
+Currently it still exposes the fields on hasOwnProperty, has etc, and enumerable in debugger, which will be removed soon. 
