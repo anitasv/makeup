@@ -29,4 +29,11 @@ Animal = concealer(Animal)
 var a = new Animal('bark', 'dog')
 ```
 
+```
+> a._sound
+err: Tried to get private field _sound
+> a._greeting
+err: Tried to get private method _greeting
+```
+
 Currently it still exposes the fields on hasOwnProperty, has etc, and enumerable in debugger, which will be removed soon. 
