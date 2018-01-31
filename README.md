@@ -31,11 +31,11 @@ var a = new Animal('bark', 'dog')
 
 ```
 > a._sound
-err: Tried to get private field _sound
+err: _sound is private
 > a._greeting
-err: Tried to get private method _greeting
+err: _greeting is private
 > a._sound = 'meow'
-err: Tried to set private field _sound
+err: _sound is private
 > a.talk()
 "dog says bark"
 > a.breed = 'cat'
