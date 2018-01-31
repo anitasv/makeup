@@ -63,6 +63,11 @@ function test() {
     eq('cat says bark', b2.talk())
     eq(undefined, b2._sound);
     eq(undefined, b2._greeting);
+
+    eq(true, b2.hasOwnProperty('breed'))
+    eq(false, b2.hasOwnProperty('_sound'))
+    eq(1,  Object.keys(b2).length)
+    eq('breed',  Object.keys(b2)[0])
 }
 
 window.setTimeout(test, 0)
