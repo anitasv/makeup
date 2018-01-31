@@ -1,4 +1,5 @@
 
+
 /**
  * @constructor
  */
@@ -55,6 +56,10 @@ function test() {
     eq('dog says bark', b1.talk())
     eq(undefined, b1._sound);
     eq(undefined, b1._greeting);
+
+    delete b1['_sound']
+    delete b1['_greeting']
+    eq('dog says bark', b1.talk())
 
     var b2 = new SafeAnimal('bark', 'dog')
     b2._sound = 'meow'
