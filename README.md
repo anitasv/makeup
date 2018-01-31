@@ -45,7 +45,5 @@ err: Tried to set private field _sound
 ```
 
 ### Known Issues
-1. has functions pass through
-2. delete pass through
-3. iterable on keys
-4. functions are not cached.
+1. delete pass through
+2. performace may be slow.
