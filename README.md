@@ -48,5 +48,4 @@ false
 ```
 
 ### Known Issues
-1. delete pass through
-2. performace may be slow.
+1. performace may be slow.
