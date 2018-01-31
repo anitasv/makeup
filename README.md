@@ -1,5 +1,5 @@
 # makeup
-A set of small libraries to make your javascript beter. Performance may not be great yet, working on it.
+A set of small libraries to make your javascript better. Performance may not be great yet, working on it.
 
 ## Concealer
 Helps you hide your private fields and methods.
