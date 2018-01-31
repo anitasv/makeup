@@ -47,3 +47,6 @@ err: _sound is private
 false
 ```
 
+## Upcoming 
+1. Foundation: if you have only pure readonly functions, you are a good foundation to memoize them. Remember to apply foundation before concealer. You can write a dependency injection class using this.
+
