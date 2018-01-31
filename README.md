@@ -44,4 +44,8 @@ err: Tried to set private field _sound
 
 ```
 
-Currently it still exposes the fields on hasOwnProperty, has etc, and enumerable in debugger, which will be removed soon. 
+### Known Issues
+1. has functions pass through
+2. delete pass through
+3. iterable on keys
+
