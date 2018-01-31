@@ -34,6 +34,14 @@ var a = new Animal('bark', 'dog')
 err: Tried to get private field _sound
 > a._greeting
 err: Tried to get private method _greeting
+> a._sound = 'meow'
+err: Tried to set private field _sound
+> a.talk()
+"dog says bark"
+> a.breed = 'cat'
+> a.talk()
+"cat says bark"
+
 ```
 
 Currently it still exposes the fields on hasOwnProperty, has etc, and enumerable in debugger, which will be removed soon. 
