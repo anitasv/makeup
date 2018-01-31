@@ -41,7 +41,10 @@ err: Tried to set private field _sound
 > a.breed = 'cat'
 > a.talk()
 "cat says bark"
-
+> Object.keys(a)
+["breed"]
+> a.hasOwnProperty('_sound')
+false
 ```
 
 ### Known Issues
