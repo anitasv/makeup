@@ -11,16 +11,11 @@ function concealer(cons) {
 
     function trapPrivate(prop, closure, action, ret) {
         var proto = closure[prop]
-        var protoType = typeof(proto)
         if (isPrivate(prop)) {
-            if (protoType == 'function') {
-                console.error('Tried to get private method', prop)
-            } else {
-                console.error('Tried to get private field', prop)
-            }
+            console.error(prop, 'is private')
             return ret
         } else {
-            return action(proto, protoType)
+            return action(proto)
         }
     }
 
@@ -32,7 +27,7 @@ function concealer(cons) {
         }
     } 
 
-    const newCons = function() {
+    function ProxyCons() {
         const initial = {}
         const closure = cons.apply(initial, argsArray(arguments)) || initial
         Object.setPrototypeOf(closure, cons.prototype)
@@ -40,9 +35,9 @@ function concealer(cons) {
         const p = new Proxy(closure, {
             get(target, prop) {
                 if (shouldForward(prop)) {
-                    return trapPrivate(prop, closure, function(proto, protoType) {
-                        if (protoType == 'function') {
-                            return proto.bind(closure)
+                    return trapPrivate(prop, target, function(proto) {
+                        if (typeof (proto) == 'function') {
+                            return proto.bind(target)
                         } else {
                             return proto
                         }
@@ -53,8 +48,8 @@ function concealer(cons) {
             },
             set(target, prop, value) {
                 if (shouldForward(prop)) {
-                    return trapPrivate(prop, closure,  function(proto, protoType) {
-                        closure[prop] = value
+                    return trapPrivate(prop, target,  function(proto) {
+                        target[prop] = value
                     })
                 } else {
                     return Reflect.set(target, prop)
@@ -62,24 +57,28 @@ function concealer(cons) {
             },
             has(target, prop) {
                 if (!isPrivate()) {
-                    return Reflect.has(closure, prop)
+                    return Reflect.has(target, prop)
                 } else {
                     return false
                 }
             },
             ownKeys(target) {
-                return Object.keys(closure).filter((x) => !isPrivate(x))
+                return Object.keys(target).filter((x) => !isPrivate(x))
             },
             getOwnPropertyDescriptor(target, prop) {
                 if (!isPrivate(prop)) {
-                  return Reflect.getOwnPropertyDescriptor(closure, prop);
+                    return Reflect.getOwnPropertyDescriptor(target, prop);
                 }
+            },
+            deleteProperty(target, prop) {
+                return trapPrivate(prop, function(proto) {
+                    return Reflect.deleteProperty(target, prop)
+                })
             }
         });
 
         return p;
     }
 
-
-    return newCons;
+    return ProxyCons;
 }
