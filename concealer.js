@@ -9,11 +9,10 @@ function concealer(cons) {
         return typeof(prop) == 'string' && prop.startsWith('_')
     }
 
-    function trapPrivate(prop, closure, action, ret) {
+    function trapPrivate(prop, closure, action) {
         var proto = closure[prop]
         if (isPrivate(prop)) {
             console.error(prop, 'is private')
-            return ret
         } else {
             return action(proto)
         }
@@ -37,6 +36,7 @@ function concealer(cons) {
                 if (shouldForward(prop)) {
                     return trapPrivate(prop, target, function(proto) {
                         if (typeof (proto) == 'function') {
+                            // This is not same as Reflect.get(target, prop)
                             return proto.bind(target)
                         } else {
                             return proto
