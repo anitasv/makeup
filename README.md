@@ -47,5 +47,3 @@ err: Tried to set private field _sound
 false
 ```
 
-### Known Issues
-1. performace may be slow.
