@@ -23,13 +23,13 @@ Animal.prototype.talk = function() {
 
 But normally private fields are only by convention of underscore, but you can enforce by:
 
-```
+```javascript
 Animal = concealer(Animal)
 
 var a = new Animal('bark', 'dog')
 ```
 
-```
+```javascript
 > a._sound
 err: _sound is private
 > a._greeting
